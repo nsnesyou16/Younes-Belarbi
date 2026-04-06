@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio – BELARBI Younes | BTS SIO SISR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f0;
+      --bg-tertiary: #efede6;
+      --text-primary: #1a1a18;
+      --text-secondary: #555550;
+      --text-tertiary: #999990;
+      --border: rgba(0,0,0,0.1);
+      --border-hover: rgba(0,0,0,0.2);
+      --green-light: #E1F5EE;
+      --green-mid: #9FE1CB;
+      --green: #1D9E75;
+      --green-dark: #0F6E56;
+      --green-darker: #085041;
+      --amber: #EF9F27;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #1e1e1c;
+        --bg-secondary: #272725;
+        --bg-tertiary: #161614;
+        --text-primary: #f0ede6;
+        --text-secondary: #a8a8a0;
+        --text-tertiary: #666660;
+        --border: rgba(255,255,255,0.1);
+        --border-hover: rgba(255,255,255,0.2);
+        --green-light: #04342C;
+        --green-mid: #085041;
+        --green: #1D9E75;
+        --green-dark: #5DCAA5;
+        --green-darker: #9FE1CB;
+      }
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .portfolio {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 2.5rem 0 2rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .header-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .header-name span { color: var(--green); }
+
+    .header-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--bg-secondary);
+      border: 0.5px solid var(--border);
+      color: var(--text-secondary);
+      width: fit-content;
+    }
+
+    .tag.accent {
+      background: var(--green-light);
+      border-color: var(--green-mid);
+      color: var(--green-dark);
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--green-light);
+      border: 0.5px solid var(--green-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: var(--green-dark);
+      flex-shrink: 0;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .nav-btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      background: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -0.5px;
+      font-family: 'DM Sans', sans-serif;
+      transition: color 0.15s;
+    }
+
+    .nav-btn.active {
+      color: var(--green);
+      border-bottom-color: var(--green);
+    }
+
+    .nav-btn:hover:not(.active) { color: var(--text-primary); }
+
+    /* ── SECTIONS ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── ACCUEIL ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-card {
+      background: var(--bg-primary);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .about-card.full { grid-column: 1 / -1; }
+
+    .about-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+
+    .about-value {
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .skill-tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--green-light);
+      color: var(--green-darker);
+      border: 0.5px solid var(--green-mid);
+    }
+
+    /* ── STAGES ── */
+    .stage-grid { display: grid; gap: 1.5rem; }
+
+    .stage-card {
+      background: var(--bg-primary);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .stage-card-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--green-light);
+      border-bottom: 0.5px solid var(--green-mid);
+    }
+
+    .stage-card-header.pending {
+      background: var(--bg-secondary);
+      border-bottom-color: var(--border);
+    }
+
+    .stage-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .stage-eyebrow.muted { color: var(--text-tertiary); }
+
+    .stage-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--green-darker);
+    }
+
+    .stage-title.muted { color: var(--text-secondary); }
+
+    .stage-badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--green-darker);
+      color: var(--green-light);
+      white-space: nowrap;
+    }
+
+    .stage-badge.pending {
+      background: var(--bg-tertiary);
+      color: var(--text-tertiary);
+      border: 0.5px solid var(--border);
+    }
+
+    .stage-body { padding: 1.5rem; }
+
+    .stage-context {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .stage-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      line-height: 1.7;
+    }
+
+    .missions-title {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+    }
+
+    .missions-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .mission-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .mission-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .pending-block {
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 13px;
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-md);
+    }
+
+    /* ── COMPÉTENCES ── */
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .comp-card {
+      background: var(--bg-primary);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      transition: border-color 0.15s;
+    }
+
+    .comp-card:hover { border-color: var(--border-hover); }
+
+    .comp-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      background: var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .comp-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--green-dark);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .comp-name {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .comp-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .status-dot.ok { background: var(--green); }
+    .status-dot.wip { background: var(--amber); }
+
+    .status-label { font-size: 11px; color: var(--text-tertiary); }
+
+    .comp-hint {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* ── VEILLE ── */
+    .veille-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .veille-card {
+      background: var(--bg-primary);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+    }
+
+    .veille-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .veille-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .veille-date {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .veille-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .veille-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .vtag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--bg-secondary);
+      color: var(--text-tertiary);
+      border: 0.5px solid var(--border);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border);
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .header { grid-template-columns: 1fr; }
+      .header-name { font-size: 32px; }
+      .avatar { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .comp-grid { grid-template-columns: 1fr 1fr; }
+      .nav-btn { padding: 8px 10px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="portfolio">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div>
+        <div class="header-name">BELARBI<br><span>Younes</span></div>
+        <div class="header-meta">
+          <div class="tag accent">BTS SIO · Option SISR</div>
+          <div class="tag">Solutions d'Infrastructure, Systèmes et Réseaux</div>
+        </div>
+      </div>
+      <div class="avatar">BY</div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav">
+      <button class="nav-btn active" onclick="showSection('accueil', this)">Accueil</button>
+      <button class="nav-btn" onclick="showSection('stages', this)">Stages</button>
+      <button class="nav-btn" onclick="showSection('competences', this)">Compétences</button>
+      <button class="nav-btn" onclick="showSection('veille', this)">Veille</button>
+    </nav>
+
+    <!-- ── ACCUEIL ── -->
+    <section id="accueil" class="section active">
+      <div class="about-grid">
+        <div class="about-card full">
+          <div class="about-label">Présentation</div>
+          <div class="about-value">
+            Étudiant en BTS SIO option SISR, je me spécialise dans l'administration des systèmes
+            et réseaux, la sécurité informatique et le support technique. Ce portfolio retrace mes
+            expériences de stage, mes compétences acquises et ma veille technologique.
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-label">Formation</div>
+          <div class="about-value">
+            BTS Services Informatiques aux Organisations<br>
+            <strong>Option SISR</strong> – 2ème année
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-label">Objectif professionnel</div>
+          <div class="about-value">
+            Administrateur systèmes &amp; réseaux · Technicien infrastructure · Support N2/N3
+          </div>
+        </div>
+        <div class="about-card full">
+          <div class="about-label">Compétences techniques</div>
+          <div class="skills-tags">
+            <span class="skill-tag">Windows Server</span>
+            <span class="skill-tag">Active Directory</span>
+            <span class="skill-tag">Réseaux TCP/IP</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Virtualisation</span>
+            <span class="skill-tag">Support utilisateur</span>
+            <span class="skill-tag">Maintenance parc</span>
+            <span class="skill-tag">Sécurité</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STAGES ── -->
+    <section id="stages" class="section">
+      <div class="stage-grid">
+
+        <!-- Stage 1 -->
+        <article class="stage-card">
+          <div class="stage-card-header">
+            <div>
+              <div class="stage-eyebrow">Première année</div>
+              <div class="stage-title">DSI – Faculté des Sports</div>
+            </div>
+            <div class="stage-badge">Validé</div>
+          </div>
+          <div class="stage-body">
+            <div class="stage-context">
+              Direction des Systèmes d'Information · Faculté des Sports · Durée : 5 semaines
+            </div>
+            <div class="stage-description">
+              La DSI est chargée de la gestion, de la maintenance et de la sécurité du parc
+              informatique de la faculté. Elle accompagne l'ensemble des utilisateurs : étudiants,
+              enseignants, personnel administratif et encadrants sportifs.
+            </div>
+            <div class="missions-title">Missions réalisées</div>
+            <div class="missions-list">
+              <div class="mission-item">
+                <div class="mission-dot"></div>
+                <span>Assistance aux utilisateurs sur le réseau de la faculté</span>
+              </div>
+              <div class="mission-item">
+                <div class="mission-dot"></div>
+                <span>Maintenance du parc informatique : diagnostic, dépannage, mises à jour logicielles</span>
+              </div>
+              <div class="mission-item">
+                <div class="mission-dot"></div>
+                <span>Participation à l'administration des serveurs via Windows Server et Active Directory</span>
+              </div>
+              <div class="mission-item">
+                <div class="mission-dot"></div>
+                <span>Installation et sécurisation de postes de travail en salle de TP</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Stage 2 -->
+        <article class="stage-card">
+          <div class="stage-card-header pending">
+            <div>
+              <div class="stage-eyebrow muted">Deuxième année</div>
+              <div class="stage-title muted">Stage à venir</div>
+            </div>
+            <div class="stage-badge pending">En attente</div>
+          </div>
+          <div class="stage-body">
+            <div class="pending-block">
+              Les informations détaillées seront ajoutées après la réalisation du stage de 2ème année.
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── COMPÉTENCES ── -->
+    <section id="competences" class="section">
+      <div class="comp-grid">
+
+        <div class="comp-card">
+          <div class="comp-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="comp-name">Gérer le patrimoine informatique</div>
+          <div class="comp-status">
+            <div class="status-dot ok"></div>
+            <div class="status-label">Acquis</div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="comp-name">Répondre aux incidents et demandes</div>
+          <div class="comp-status">
+            <div class="status-dot ok"></div>
+            <div class="status-label">Acquis</div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="comp-name">Développer la présence en ligne</div>
+          <div class="comp-status">
+            <div class="status-dot wip"></div>
+            <div class="status-label">En cours</div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="comp-name">Travailler en mode projet</div>
+          <div class="comp-status">
+            <div class="status-dot ok"></div>
+            <div class="status-label">Acquis</div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </div>
+          <div class="comp-name">Mettre à disposition un service</div>
+          <div class="comp-status">
+            <div class="status-dot ok"></div>
+            <div class="status-label">Acquis</div>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="comp-name">Organiser son développement professionnel</div>
+          <div class="comp-status">
+            <div class="status-dot wip"></div>
+            <div class="status-label">En cours</div>
+          </div>
+        </div>
+
+      </div>
+      <p class="comp-hint">Légende : <span style="color:#1D9E75">●</span> Acquis &nbsp;·&nbsp; <span style="color:#EF9F27">●</span> En cours</p>
+    </section>
+
+    <!-- ── VEILLE ── -->
+    <section id="veille" class="section">
+      <div class="veille-list">
+
+        <article class="veille-card">
+          <div class="veille-header">
+            <div class="veille-title">Zero Trust Architecture : vers la fin du périmètre réseau</div>
+            <div class="veille-date">Mars 2025</div>
+          </div>
+          <div class="veille-desc">
+            Le modèle Zero Trust repose sur le principe "ne jamais faire confiance, toujours vérifier".
+            Il répond aux limites des architectures VPN classiques face aux attaques internes et aux
+            environnements hybrides.
+          </div>
+          <div class="veille-tags">
+            <span class="vtag">Sécurité</span>
+            <span class="vtag">Réseau</span>
+            <span class="vtag">SISR</span>
+          </div>
+        </article>
+
+        <article class="veille-card">
+          <div class="veille-header">
+            <div class="veille-title">Windows Server 2025 : nouvelles fonctionnalités Active Directory</div>
+            <div class="veille-date">Fév. 2025</div>
+          </div>
+          <div class="veille-desc">
+            Microsoft a introduit de nouvelles politiques de groupe et amélioré la gestion des comptes
+            GMSA dans Windows Server 2025, renforçant la sécurité des environnements Active Directory.
+          </div>
+          <div class="veille-tags">
+            <span class="vtag">Windows Server</span>
+            <span class="vtag">Active Directory</span>
+          </div>
+        </article>
+
+        <article class="veille-card">
+          <div class="veille-header">
+            <div class="veille-title">Virtualisation : Proxmox VE vs VMware ESXi</div>
+            <div class="veille-date">Jan. 2025</div>
+          </div>
+          <div class="veille-desc">
+            Suite au rachat de VMware par Broadcom et l'augmentation des licences, de nombreuses entreprises
+            migrent vers Proxmox VE, solution open-source aux fonctionnalités comparables.
+          </div>
+          <div class="veille-tags">
+            <span class="vtag">Virtualisation</span>
+            <span class="vtag">Infrastructure</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      BELARBI Younes · BTS SIO SISR · Portfolio 2024–2025
+    </footer>
+
+  </div>
+
+  <script>
+    function showSection(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
